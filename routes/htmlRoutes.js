@@ -11,6 +11,15 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/watchanddrink", function(req, res) {
+    db.Watchrules.findAll({}).then(function(dbWatchrules) {
+      res.render("Watchanddrink", {
+        msg: "Welcome to The Watch and Drink Game!",
+        rules: dbWatchrules
+      });
+    });
+  });
+
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
     db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
