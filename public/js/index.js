@@ -2,6 +2,10 @@
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
+var $logInBtn = $("#logIn");
+var $logInSubmitBtn = $("#logInSubmit");
+var $signUpBtn = $("#signUp");
+var $signUpSubmitBtn = $("#submitSignUp");
 var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
@@ -94,6 +98,65 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+// handleLogIn is called when the login button is clicked.
+// This prompts the user with a bootstrap modal for login information to send to the backend.
+var handleLogIn = function(event) {
+  event.preventDefault();
+  let logInEmail = $('#logInEmail').val().trim();
+  let logInPassword = $('#logInPassword').val().trim();
+
+  
+  $logInSubmitBtn.on("click", function() {
+    
+    let handShake = {
+      email: logInemail,
+      password: logInPassword
+    };
+
+  let modal = $('#modalSignUp').modal('hide');
+  logInForm.reset();
+
+  return $.ajax({
+    type: "POST",
+    url: "/login",
+    data: handShake
+  })
+
+});
+
+};
+
+// handleSignUp is called when the signUp button is clicked.
+// This prompts the user with a bootstrap modal for information for signing up to create a user in the database.
+var handleSignUp = function(event) {
+  event.preventDefault();
+
+  $signUpSubmitBtn.on("click", function() {
+
+    let firstName = $('#signUpFirstName').val().trim();
+    let lastName = $('#signUpLastName').val().trim();
+    let email = $('#signUpEmail').val().trim();
+    let password = $('#signUpPassword').val().trim();
+
+    let handShake = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: logInPassword
+    };
+
+     $.post("/register", handShake)
+
+     let modal = $('#modalSignUp').modal('hide');
+     signUpForm.reset();
+
+  });
+
+};
+
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
+$logInBtn.on("click", handleLogIn);
+$signUpBtn.on("click", handleSignUp);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
