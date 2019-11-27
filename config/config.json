@@ -1,14 +1,21 @@
 {
   "development": {
     "username": "root",
-    "password": null,
+    "password": "",
     "database": "exampledb",
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "operatorsAliases": false,
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    }
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",
