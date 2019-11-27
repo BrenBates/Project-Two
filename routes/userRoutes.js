@@ -54,27 +54,27 @@ app.post('/register', (req,res) => {
 })
 
 //LOGIN
-// app.post('/login', (req,res) => {
-//     db.User.findOne({
-//         where: {
-//             email: req.body.email
-//         }
-//     })
-//         .then(user => {
-//             //if client side and database side passwords match, then generate the token and send the token to the front end.  Else, send that the user doesn't exist.
-//             if (bcrypt.compareSync(req.body.password, user.password)) {
-//                 let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-//                     expiresIn: 1440
-//                 })
-//                 res.json({ token: token })
-//             } else {
-//                 res.send('User does not exist')
-//             }
-//         })
-//         .catch(err => {
-//             res.send('error: ' + err)
-//         })
-// })
+app.post('/login', (req,res) => {
+    db.user.findOne({
+        where: {
+            email: req.body.email
+        }
+    })
+        .then(user => {
+            //if client side and database side passwords match, then generate the token and send the token to the front end.  Else, send that the user doesn't exist.
+            if (bcrypt.compareSync(req.body.password, user.password)) {
+                let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+                    expiresIn: 1440
+                })
+                res.json({ token: token })
+            } else {
+                res.send('User does not exist')
+            }
+        })
+        .catch(err => {
+            res.send('error: ' + err)
+        })
+})
 
 
 //PROFILE - fetching profile for the client side.
