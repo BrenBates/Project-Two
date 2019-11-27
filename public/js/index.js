@@ -101,26 +101,27 @@ var handleDeleteBtnClick = function() {
 // handleLogIn is called when the login button is clicked.
 // This prompts the user with a bootstrap modal for login information to send to the backend.
 var handleLogIn = function(event) {
-  event.preventDefault();
-  let logInEmail = $('#logInEmail').val().trim();
-  let logInPassword = $('#logInPassword').val().trim();
-
-  
+ 
+ 
   $logInSubmitBtn.on("click", function() {
-    
+    event.preventDefault();
+    let logInEmail = $('#logInEmail').val().trim();
+    let logInPassword = $('#logInPassword').val().trim();
+    console.log(logInEmail);
+    console.log(logInPassword);
+
     let handShake = {
-      email: logInemail,
+      email: logInEmail,
       password: logInPassword
     };
 
-  let modal = $('#modalSignUp').modal('hide');
+    console.log(handShake);
+
+  $.post("/login", handShake)
+  let modal = $('#modalLogIn').modal('hide');
   logInForm.reset();
 
-  return $.ajax({
-    type: "POST",
-    url: "/login",
-    data: handShake
-  })
+ 
 
 });
 
@@ -129,10 +130,10 @@ var handleLogIn = function(event) {
 // handleSignUp is called when the signUp button is clicked.
 // This prompts the user with a bootstrap modal for information for signing up to create a user in the database.
 var handleSignUp = function(event) {
-  event.preventDefault();
+  
 
   $signUpSubmitBtn.on("click", function() {
-
+    event.preventDefault();
     let firstName = $('#signUpFirstName').val().trim();
     let lastName = $('#signUpLastName').val().trim();
     let email = $('#signUpEmail').val().trim();
@@ -147,10 +148,11 @@ var handleSignUp = function(event) {
 
     console.log(handShake);
 
-     $.post("/register", handShake)
+    $.post("/register", handShake)
+    let modal = $('#modalSignUp').modal('hide');
+    signUpForm.reset();
 
-    //  let modal = $('#modalSignUp').modal('hide');
-    //  signUpForm.reset();
+    
 
   });
 
