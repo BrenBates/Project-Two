@@ -8,11 +8,19 @@ module.exports = function(app) {
     });
   });
 
+  // app.get("/api/users", function(req, res) {
+  //   db.user.findAll({}).then(function(dbUsers) {
+  //     res.json(dbUsers);
+  //   });
+  // });
+
 
   // Create a new example
   app.post("/api/examples", function(req, res) {
     db.Example.create(req.body).then(function(dbExample) {
       res.json(dbExample);
+    }).catch(function(err) {
+      res.json(err);
     });
   });
 

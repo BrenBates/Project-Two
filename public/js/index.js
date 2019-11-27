@@ -136,19 +136,21 @@ var handleSignUp = function(event) {
     let firstName = $('#signUpFirstName').val().trim();
     let lastName = $('#signUpLastName').val().trim();
     let email = $('#signUpEmail').val().trim();
-    let password = $('#signUpPassword').val().trim();
+    let signUpPassword = $('#signUpPassword').val().trim();
 
     let handShake = {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: logInPassword
+      password: signUpPassword
     };
+
+    console.log(handShake);
 
      $.post("/register", handShake)
 
-     let modal = $('#modalSignUp').modal('hide');
-     signUpForm.reset();
+    //  let modal = $('#modalSignUp').modal('hide');
+    //  signUpForm.reset();
 
   });
 
