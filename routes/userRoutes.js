@@ -64,7 +64,7 @@ app.post('/login', (req,res) => {
             //if client side and database side passwords match, then generate the token and send the token to the front end.  Else, send that the user doesn't exist.
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-                    expiresIn: 1440
+                    expiresIn: 10000
                 })
                 res.json({ token: token })
             } else {
@@ -78,25 +78,25 @@ app.post('/login', (req,res) => {
 
 
 //PROFILE - fetching profile for the client side.
-// app.get('/profile', (req, res) => {
-//     var decoded  = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
+app.get('/profile', (req, res) => {
+    var decoded  = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
-//     db.User.findOne({
-//         where: {
-//             id: decoded.id
-//         }
-//     })
-//         .then(user => {
-//             if (user) {
-//                 res.json(user)
-//             } else {
-//                 res.send('User does not exist')
-//             }
-//         })
-//         .catch(err => {
-//             res.send('error: ' + err)
-//         })
-// })
+    db.user.findOne({
+        where: {
+            id: decoded.id
+        }
+    })
+        .then(user => {
+            if (user) {
+                res.json(user)
+            } else {
+                res.send('User does not exist')
+            }
+        })
+        .catch(err => {
+            res.send('error: ' + err)
+        })
+})
 
 };
 // module.exports = users
