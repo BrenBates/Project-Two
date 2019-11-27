@@ -13,6 +13,8 @@ app.post('/register', (req,res) => {
         created: today
     }
 
+    console.log(userData);
+
     //find if the user already exists
     db.User.findOne({
         where: {
