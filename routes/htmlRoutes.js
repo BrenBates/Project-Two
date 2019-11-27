@@ -17,7 +17,7 @@ module.exports = function(app) {
       res.render("example", {
         example: dbExample
       });
-    });
+    });// balh
   });
 
   // Render 404 page for any unmatched routes
