@@ -3,6 +3,10 @@
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
+
+        <button id="signUp" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalSignUp">Sign Up</button>
+        <button id="logIn" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalLogIn">Log In</button>
+        
         <h2>This is our Home Page!</h2>
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
@@ -29,5 +33,67 @@
   </div>
 </div>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!--Various Modals for User Authentication-->
+  ​
+<!-- Modal for Signing Up -->
+
+  <div class="modal fade" id="modalSignUp">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"></button>
+        </div>
+        <!-- body -->
+        <div class="modal-header">
+          <form role="form" id="signUpForm">
+            <div class="form-group">
+              <input id="signUpFirstName" type="text" class="form-control" placeholder="First Name" />
+              <input id="signUpLastName" type="text" class="form-control" placeholder="Last Name" />
+              <input id="signUpEmail" type="email" class="form-control" placeholder="Email" />
+              <input id="signUpPassword" type="password" class="form-control" placeholder="Password" />
+            </div>
+          </form>
+        </div>
+        <!-- footer -->
+        <div class="modal-footer">
+          <button type='submit' id='submitSignUp' class="btn btn-dark btn-block">Sign Up</button>
+        </div>
+        ​
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal for Logging In -->
+
+<div class="modal fade" id="modalLogIn">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!-- header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"></button>
+          ​
+        </div>
+        <!-- body -->
+        <div class="modal-header">
+          <form role="form" id="logInForm">
+            <div class="form-group">
+              <!-- <input id="login-displayname" type="text" class="form-control" placeholder="Display Name" /> -->
+              <input id="logInEmail" type="email" class="form-control" placeholder="Email" />
+              <input id="logInPassword" type="password" class="form-control" placeholder="Password" />
+            </div>
+          </form>
+        </div>
+        <!-- footer -->
+        <div class="modal-footer">
+          <button type='submit' id='logInSubmit' class="btn btn-dark btn-block">Log In</button>
+        </div>
+        ​
+      </div>
+    </div>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
