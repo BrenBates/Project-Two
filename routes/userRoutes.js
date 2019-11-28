@@ -6,7 +6,6 @@ var jwt = require("jsonwebtoken")
 module.exports = function(app) {
  
 
-
 app.get("/api/users", function(req, res) {
     db.user.findAll({}).then(function(dbUsers) {
       res.json(dbUsers);
@@ -40,7 +39,10 @@ app.post('/register', (req,res) => {
                     let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
                         expiresIn: 1440
                     })
+                    
+                    console.log(token)
                     res.json({ token: token })
+                    
                 })
                 .catch(err => {
                     res.send('error: ' + err)
@@ -66,6 +68,7 @@ app.post('/login', (req,res) => {
                 let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
                     expiresIn: 10000
                 })
+               console.log(token)
                 res.json({ token: token })
             } else {
                 res.send('User does not exist')

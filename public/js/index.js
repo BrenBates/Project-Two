@@ -100,6 +100,17 @@ var handleDeleteBtnClick = function() {
 
 // handleLogIn is called when the login button is clicked.
 // This prompts the user with a bootstrap modal for login information to send to the backend.
+
+
+// On the frontend after the user has received the jwt from /login, save it to sessionStorage by sessionStorage.setItem('jwt', token);
+
+// On the frontend, also add the following:
+
+// if ($window.sessionStorage.token) {
+//           xhr.setRequestHeader("Authorization", $window.sessionStorage.token);
+//       }
+
+let userToken;
 var handleLogIn = function(event) {
  
  
@@ -107,19 +118,25 @@ var handleLogIn = function(event) {
     event.preventDefault();
     let logInEmail = $('#logInEmail').val().trim();
     let logInPassword = $('#logInPassword').val().trim();
-    console.log(logInEmail);
-    console.log(logInPassword);
+  
 
     let handShake = {
       email: logInEmail,
       password: logInPassword
     };
 
-    console.log(handShake);
+     let modal = $('#modalLogIn').modal('hide');
+    logInForm.reset();
 
-  $.post("/login", handShake)
-  let modal = $('#modalLogIn').modal('hide');
-  logInForm.reset();
+  $.post("/login", handShake).then( function(response) {
+    console.log("log in succcessful");
+    userToken = response.token;
+    sessionStorage.setItem('jwt', userToken);
+    
+    console.log(userToken);
+    
+  })
+ 
 
  
 
@@ -146,13 +163,17 @@ var handleSignUp = function(event) {
       password: signUpPassword
     };
 
-    console.log(handShake);
-
-    $.post("/register", handShake)
     let modal = $('#modalSignUp').modal('hide');
     signUpForm.reset();
 
-    
+    $.post("/register", handShake).then( function(response) {
+      console.log("log in succcessful");
+      userToken = response.token;
+      sessionStorage.setItem('jwt', userToken);
+     
+      console.log(userToken);
+    })
+   
 
   });
 
