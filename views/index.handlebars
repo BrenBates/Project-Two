@@ -4,6 +4,12 @@
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
 
+
+      {{token}}
+        {{#each token}}
+          {{token}}
+        {{/each}}
+
         <button id="signUp" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalSignUp">Sign Up</button>
         <button id="logIn" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalLogIn">Log In</button>
         

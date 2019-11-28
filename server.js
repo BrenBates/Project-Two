@@ -7,7 +7,7 @@ var bcrypt = require("bcrypt")
 var db = require("./models");
 var app = express();
 var PORT = process.env.PORT || 3000;
-process.env.SECRET_KEY = 'secret'
+
 
 
 // Middleware
@@ -28,12 +28,13 @@ app.set("view engine", "handlebars");
 
 
 // Routes
+require("./routes/userRoutes")(app);
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
-require("./routes/Users")(app);
 
-var Users = require("./models/User");
-app.use("/users", Users);
+
+// var Users = require("./models/User");
+// app.use("/users", Users);
 
 var syncOptions = { force: false };
 

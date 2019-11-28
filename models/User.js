@@ -17,11 +17,11 @@ module.exports = function(sequelize, DataTypes) {
       },
       password: {
           type: DataTypes.STRING
-      },
-      created: {
-          type: DataTypes.DATE,
-          defaultValue: DataTypes.NOW
       }
+    //   created: {
+    //       type: DataTypes.DATE,
+    //       defaultValue: DataTypes.NOW
+    //   }
     },
     {
         timestamps: false

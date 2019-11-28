@@ -100,27 +100,45 @@ var handleDeleteBtnClick = function() {
 
 // handleLogIn is called when the login button is clicked.
 // This prompts the user with a bootstrap modal for login information to send to the backend.
-var handleLogIn = function(event) {
-  event.preventDefault();
-  let logInEmail = $('#logInEmail').val().trim();
-  let logInPassword = $('#logInPassword').val().trim();
 
-  
+
+// On the frontend after the user has received the jwt from /login, save it to sessionStorage by sessionStorage.setItem('jwt', token);
+
+// On the frontend, also add the following:
+
+// if ($window.sessionStorage.token) {
+//           xhr.setRequestHeader("Authorization", $window.sessionStorage.token);
+//       }
+
+let userToken;
+var handleLogIn = function(event) {
+ 
+ 
   $logInSubmitBtn.on("click", function() {
-    
+    event.preventDefault();
+    let logInEmail = $('#logInEmail').val().trim();
+    let logInPassword = $('#logInPassword').val().trim();
+  
+
     let handShake = {
-      email: logInemail,
+      email: logInEmail,
       password: logInPassword
     };
 
-  let modal = $('#modalSignUp').modal('hide');
-  logInForm.reset();
+     let modal = $('#modalLogIn').modal('hide');
+    logInForm.reset();
 
-  return $.ajax({
-    type: "POST",
-    url: "/login",
-    data: handShake
+  $.post("/login", handShake).then( function(response) {
+    console.log("log in succcessful");
+    userToken = response.token;
+    sessionStorage.setItem('jwt', userToken);
+    
+    console.log(userToken);
+    
   })
+ 
+
+ 
 
 });
 
@@ -129,26 +147,33 @@ var handleLogIn = function(event) {
 // handleSignUp is called when the signUp button is clicked.
 // This prompts the user with a bootstrap modal for information for signing up to create a user in the database.
 var handleSignUp = function(event) {
-  event.preventDefault();
+  
 
   $signUpSubmitBtn.on("click", function() {
-
+    event.preventDefault();
     let firstName = $('#signUpFirstName').val().trim();
     let lastName = $('#signUpLastName').val().trim();
     let email = $('#signUpEmail').val().trim();
-    let password = $('#signUpPassword').val().trim();
+    let signUpPassword = $('#signUpPassword').val().trim();
 
     let handShake = {
       firstName: firstName,
       lastName: lastName,
       email: email,
-      password: logInPassword
+      password: signUpPassword
     };
 
-     $.post("/register", handShake)
+    let modal = $('#modalSignUp').modal('hide');
+    signUpForm.reset();
 
-     let modal = $('#modalSignUp').modal('hide');
-     signUpForm.reset();
+    $.post("/register", handShake).then( function(response) {
+      console.log("log in succcessful");
+      userToken = response.token;
+      sessionStorage.setItem('jwt', userToken);
+     
+      console.log(userToken);
+    })
+   
 
   });
 
