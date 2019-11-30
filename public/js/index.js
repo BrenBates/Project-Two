@@ -6,7 +6,12 @@ var $logInBtn = $("#logIn");
 var $logInSubmitBtn = $("#logInSubmit");
 var $signUpBtn = $("#signUp");
 var $signUpSubmitBtn = $("#submitSignUp");
+var $viewTeamsBtn = $("#viewTeams");
+var $viewGamesBtn = $("#viewGames");
 var $exampleList = $("#example-list");
+var loggedInLinks = document.querySelectorAll('.logged-in');
+var loggedOutLinks= document.querySelectorAll('.logged-out');
+
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -110,7 +115,7 @@ var handleDeleteBtnClick = function() {
 //           xhr.setRequestHeader("Authorization", $window.sessionStorage.token);
 //       }
 
-let userToken;
+let userToken = null;
 var handleLogIn = function(event) {
  
  
@@ -132,6 +137,11 @@ var handleLogIn = function(event) {
     console.log("log in succcessful");
     userToken = response.token;
     sessionStorage.setItem('jwt', userToken);
+
+    if(userToken !== null) {
+      loggedOutLinks.forEach(item => item.style.display = 'none');
+      loggedInLinks.forEach(item => item.style.display = 'block');
+    }
     
     console.log(userToken);
     
@@ -170,6 +180,10 @@ var handleSignUp = function(event) {
       console.log("log in succcessful");
       userToken = response.token;
       sessionStorage.setItem('jwt', userToken);
+      if(userToken !== null) {
+        loggedOutLinks.forEach(item => item.style.display = 'none');
+        loggedInLinks.forEach(item => item.style.display = 'block');
+      }
      
       console.log(userToken);
     })
@@ -179,9 +193,37 @@ var handleSignUp = function(event) {
 
 };
 
-// Add event listeners to the submit and delete buttons
+var handleViewTeams = function(event) {
+    console.log(sessionStorage.getItem('jwt'));
+
+    
+
+  $.ajax({
+    url: "/viewteams",
+    type: "GET",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', sessionStorage.getItem('jwt'));
+      console.log(xhr);
+    },
+    success: function() {
+       
+     
+      //  window.location.href = '/viewteams'
+    
+    }
+  });
+
+}
+
+handleViewGames = function(event) {
+  document.location.href = '/viewgames'
+}
+
+// Add event listeners to the buttons
 $submitBtn.on("click", handleFormSubmit);
 $logInBtn.on("click", handleLogIn);
 $signUpBtn.on("click", handleSignUp);
+$viewTeamsBtn.on("click", handleViewTeams);
+$viewGamesBtn.on("click", handleViewGames);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
 
