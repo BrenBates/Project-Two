@@ -7,8 +7,6 @@ var $logInSubmitBtn = $("#logInSubmit");
 var $signUpBtn = $("#signUp");
 var $signUpSubmitBtn = $("#submitSignUp");
 var $exampleList = $("#example-list");
-var loggedInLinks = document.querySelectorAll('.logged-in');
-var loggedOutLinks= document.querySelectorAll('.logged-out');
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -112,7 +110,7 @@ var handleDeleteBtnClick = function() {
 //           xhr.setRequestHeader("Authorization", $window.sessionStorage.token);
 //       }
 
-let userToken = null;
+let userToken;
 var handleLogIn = function(event) {
  
  
@@ -134,11 +132,6 @@ var handleLogIn = function(event) {
     console.log("log in succcessful");
     userToken = response.token;
     sessionStorage.setItem('jwt', userToken);
-
-    if(userToken !== null) {
-      loggedOutLinks.forEach(item => item.style.display = 'none');
-      loggedInLinks.forEach(item => item.style.display = 'block');
-    }
     
     console.log(userToken);
     
@@ -177,10 +170,6 @@ var handleSignUp = function(event) {
       console.log("log in succcessful");
       userToken = response.token;
       sessionStorage.setItem('jwt', userToken);
-      if(userToken !== null) {
-        loggedOutLinks.forEach(item => item.style.display = 'none');
-        loggedInLinks.forEach(item => item.style.display = 'block');
-      }
      
       console.log(userToken);
     })
