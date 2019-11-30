@@ -101,39 +101,5 @@ app.get('/profile', (req, res) => {
         })
 })
 
-
-app.get("/viewteams", function(req, res) {
-    
-    console.log(req.headers);
-    console.log(req.headers['authorization']);
-    var decoded  = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
-    
-    console.log('decoded id',decoded.id);
-
-    // res.render("viewteams");
-
-    db.user.findOne({
-        where: {
-            id: decoded.id
-        }
-    })
-        .then(user => {
-            if (user) {
-                 res.render("viewteams")
-               
-            } 
-            
-            else {
-                res.send('User does not exist')
-            }
-        })
-        .catch(err => {
-            res.send('error: ' + err)
-        })
-
-  });
-
-
-
 };
 // module.exports = users
