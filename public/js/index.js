@@ -7,6 +7,11 @@ var $logInSubmitBtn = $("#logInSubmit");
 var $signUpBtn = $("#signUp");
 var $signUpSubmitBtn = $("#submitSignUp");
 var $exampleList = $("#example-list");
+<<<<<<< HEAD
+=======
+var loggedInLinks = document.querySelectorAll('.logged-in');
+var loggedOutLinks= document.querySelectorAll('.logged-out');
+>>>>>>> parent of d7eff93... Added buttons for view teams and view games when log in
 
 // The API object contains methods for each kind of request we'll make
 var API = {
