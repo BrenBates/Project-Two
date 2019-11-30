@@ -4,8 +4,20 @@
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
 
-        <button id="signUp" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalSignUp">Sign Up</button>
-        <button id="logIn" class="btn btn-primary float-right" data-toggle="modal" data-target="#modalLogIn">Log In</button>
+
+      {{token}}
+        {{#each token}}
+          {{token}}
+        {{/each}}
+
+        <button id="signUp" class="btn btn-primary float-right logged-out" style="display:block" data-toggle="modal" data-target="#modalSignUp">Sign Up</button>
+        <button id="logIn" class="btn btn-primary float-right logged-out" style="display:block" data-toggle="modal" data-target="#modalLogIn">Log In</button>
+        <button id="viewTeams" class="btn btn-primary float-right logged-in" style="display:none">View Teams</button>
+        <button id="viewGames" class="btn btn-primary float-right logged-in" style="display:none">View Current Games</button>
+
+        {{!-- <a href="/viewteams"></a>
+        <a href="/viewgames"></a> --}}
+
         
         <h4>Login or Sign Up as a New Member!</h4>
 

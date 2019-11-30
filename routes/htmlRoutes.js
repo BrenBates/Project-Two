@@ -11,6 +11,13 @@ module.exports = function(app) {
     });
   });
 
+  
+
+  app.get("/viewgames", function(req, res) {
+    
+    res.render("viewgames")
+  });
+
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
